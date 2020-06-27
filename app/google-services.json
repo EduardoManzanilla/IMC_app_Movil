@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "781546102825",
+    "firebase_url": "https://dbimc-c9ec5.firebaseio.com",
+    "project_id": "dbimc-c9ec5",
+    "storage_bucket": "dbimc-c9ec5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781546102825:android:19850103ddf5db5eda7c38",
+        "android_client_info": {
+          "package_name": "com.perlaaguileta.imc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781546102825-g2f39m151vum9e10jl7ncuqhl18oi2da.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBTVLFrNRj4PeJFv-_D3Z6kSIZNH-DI1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781546102825-g2f39m151vum9e10jl7ncuqhl18oi2da.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

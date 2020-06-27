@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "562087834161",
+    "firebase_url": "https://imcfirebaseproject-de7e7.firebaseio.com",
+    "project_id": "imcfirebaseproject-de7e7",
+    "storage_bucket": "imcfirebaseproject-de7e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562087834161:android:9f1acee76bf16476b91b10",
+        "android_client_info": {
+          "package_name": "com.perlaaguileta.imc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562087834161-u3qtk0lcfabuuvctfkp2b6eopfuhu7n8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.perlaaguileta.imc",
+            "certificate_hash": "2c054942c5909119dbf1a3cc51f493a2a734c336"
+          }
+        },
+        {
+          "client_id": "562087834161-gg1ogh41ho4rhu4ag2b6trjisc4jgkup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTHe-sj2nKGnmpjJvcyVrX07KG2gOUw0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562087834161-gg1ogh41ho4rhu4ag2b6trjisc4jgkup.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_grav"
+    app:startDestination="@id/inicioFragment">
+
+    <fragment
+        android:id="@+id/inicioFragment"
+        android:name="com.perlaaguileta.imc.inicioFragment"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicioFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.perlaaguileta.imc.loginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_controlFragment"
+            app:destination="@id/controlFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registrarFragment"
+            app:destination="@id/registrarFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_restablecerPasswordFragment"
+            app:destination="@id/restablecerPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/controlFragment"
+        android:name="com.perlaaguileta.imc.ControlFragment"
+        android:label="fragment_control"
+        tools:layout="@layout/fragment_control" >
+        <action
+            android:id="@+id/action_controlFragment_to_editarFragment"
+            app:destination="@id/editarFragment" />
+        <action
+            android:id="@+id/action_controlFragment_to_informeFragment"
+            app:destination="@id/informeFragment" />
+        <action
+            android:id="@+id/action_controlFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarFragment"
+        android:name="com.perlaaguileta.imc.EditarFragment"
+        android:label="fragment_editar"
+        tools:layout="@layout/fragment_editar" />
+    <fragment
+        android:id="@+id/registrarFragment"
+        android:name="com.perlaaguileta.imc.registrarFragment"
+        android:label="fragment_registrar"
+        tools:layout="@layout/fragment_registrar" >
+        <action
+            android:id="@+id/action_registrarFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/informeFragment"
+        android:name="com.perlaaguileta.imc.informeFragment"
+        android:label="fragment_informe"
+        tools:layout="@layout/fragment_informe" />
+    <fragment
+        android:id="@+id/restablecerPasswordFragment"
+        android:name="com.perlaaguileta.imc.RestablecerPasswordFragment"
+        android:label="fragment_restablecer_password"
+        tools:layout="@layout/fragment_restablecer_password" />
+</navigation>

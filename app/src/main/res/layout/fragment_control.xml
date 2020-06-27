@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ControlFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Control IMC"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/txtIMC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:ems="10"
+            android:hint="IMC"
+            android:inputType="text"
+            android:paddingLeft="5dp"
+            android:focusable="false"
+            android:cursorVisible="true"/>
+
+        <EditText
+            android:id="@+id/txtClasificacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:ems="10"
+            android:hint=" Clasificación"
+            android:inputType="text"
+            android:paddingLeft="5dp"
+            android:focusable="false"
+            android:cursorVisible="true"/>
+
+
+        <EditText
+            android:id="@+id/txtRecomendacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:focusable="false"
+            android:hint=" Recomendación"
+            android:inputType="text"
+            android:paddingLeft="5dp" />
+
+        <Button
+            android:id="@+id/btn_registrarAvance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="15dp"
+            android:text="Registrar Avance"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_informe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:text="Informe"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_editarDatos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:text="Editar Datos"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_eliminarCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:text="Eliminar Cuenta"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_cerrarSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:text="Cerrar sesión"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+</FrameLayout>
