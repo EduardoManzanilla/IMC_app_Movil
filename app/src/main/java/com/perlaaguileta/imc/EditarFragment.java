@@ -1,5 +1,8 @@
 package com.perlaaguileta.imc;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,13 +53,15 @@ public class EditarFragment extends Fragment {
     private FirebaseAuth auth;
     private DatabaseReference database;
     private DatabaseReference dataB;
-    EditText edad, peso, estatura;
+    EditText edad, peso, estatura, contraseña;
     Button btnActualizar;
 
     private int age = 0;
     private double weight = 0.0;
     private double height= 0.0;
 
+
+    NavController navController;
 
     public EditarFragment() {
         // Required empty public constructor
@@ -101,11 +110,13 @@ public class EditarFragment extends Fragment {
         peso =  view.findViewById(R.id.txt_Peso);
         estatura = view.findViewById(R.id.txt_Estatura);
 
+        navController = Navigation.findNavController(view);
 
         database = FirebaseDatabase.getInstance().getReference();
 
         final NavController navController = Navigation.findNavController(view);
         btnActualizar = view.findViewById(R.id.btn_actualizar);
+        Button btn_eliminar = view.findViewById(R.id.btn_eliminarCuenta);
 
         mostrar();
 
@@ -115,6 +126,37 @@ public class EditarFragment extends Fragment {
                 getUserInfo();
             }
         });
+
+        btn_eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                // Get the layout inflater
+                LayoutInflater inflater = requireActivity().getLayoutInflater();
+                View v = inflater.inflate(R.layout.dialog_eliminar, null);
+                contraseña = (EditText) v.findViewById(R.id.Dialog_Password);
+                // Inflate and set the layout for the dialog
+                // Pass null as the parent view because its going in the dialog layout
+                builder.setView(v)
+                        // Add action buttons
+                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                Log.i("Entrando al onClik", "positivo");
+                                String valor = contraseña.getText().toString();
+                                Log.i("contraseña", valor);
+
+                                validate(valor);
+
+                            }
+                        })
+                        .setNegativeButton("Cancelar", null)
+                        .create();
+                builder.show();
+            }
+        });
     }
 
     private void getUserInfo(){
@@ -122,8 +164,6 @@ public class EditarFragment extends Fragment {
         age = Integer.valueOf(edad.getText().toString());
         weight = Double.parseDouble(peso.getText().toString());
         height = Double.parseDouble(estatura.getText().toString());
-
-
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user!=null){
@@ -150,7 +190,7 @@ public class EditarFragment extends Fragment {
                 }
             });
         }else{
-
+            Toast.makeText(getActivity() , "No se pudo realizar la actualización.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -180,12 +220,11 @@ public class EditarFragment extends Fragment {
                     String ed = dataSnapshot.child("Edad").getValue().toString();
                     String pess = dataSnapshot.child("Peso").getValue().toString();
                     String esta = dataSnapshot.child("Estatura").getValue().toString();
-                    String cont = dataSnapshot.child("Contraseña").getValue().toString();
 
                     edad.setText(ed);
                     peso.setText(pess);
                     estatura.setText(esta);
-                   // contraseña.setText(cont);
+
                 }
             }
 
@@ -194,5 +233,78 @@ public class EditarFragment extends Fragment {
 
             }
         });
+    }
+
+    private void validate(final String oldPassword) {//Metodo para eliminar usuario des de la autenticacion
+
+        String id = "";
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user!=null) {
+            id = user.getUid();
+
+            database.child("users").child(id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+
+                        String coo = dataSnapshot.child("Correo").getValue().toString();
+
+                        AuthCredential credential = EmailAuthProvider.getCredential(coo, oldPassword);
+                            user.reauthenticate(credential).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    System.out.println("Re-authenticated");
+                                    user.delete();
+                                    eliminarBase();
+                                }
+
+                            });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }else {
+            Log.i("getUid",  "usuario no encontrado");
+        }
+    }
+
+    private void eliminarBase(){//Eliminacion de los datos de la base de datos, pero no de la autenticaion
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user!=null){
+            final String uid = user.getUid();
+            database.child("users").child(uid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+                        database.child("users").child(uid).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                navController.navigate(R.id.action_editarFragment_to_inicioFragment);
+                                Toast.makeText(getActivity() , "Cuenta Eliminada con Exito.", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getActivity() , "Lo sentinmos tenems problemas para eliminar su cuenta.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }else{
+
+        }
     }
 }

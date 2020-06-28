@@ -60,10 +60,18 @@
             android:text="Iniciar Sesión"
             android:textSize="18sp" />
         <TextView
-            android:id="@+id/textRegistrar"
+            android:id="@+id/textOlvidar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:text="¿Olvidaste tu cantraseña?"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/textRegistrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="Registrarse"
             android:gravity="center"
             />

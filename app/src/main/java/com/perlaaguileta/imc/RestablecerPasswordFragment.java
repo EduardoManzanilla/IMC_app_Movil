@@ -1,7 +1,9 @@
 package com.perlaaguileta.imc;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link RestablecerPasswordFragment#newInstance} factory method to
@@ -47,12 +53,15 @@ public class RestablecerPasswordFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    EditText contraseña, correo;
-    String pass, email;
+    EditText correo;
 
-    private Dialog dialog;
     private FirebaseAuth auth;
     private DatabaseReference database;
+
+    private String email= "";
+
+    AlertDialog.Builder builder;
+    AlertDialog dialog;
 
     public RestablecerPasswordFragment() {
         // Required empty public constructor
@@ -95,55 +104,73 @@ public class RestablecerPasswordFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dialog= new Dialog(getActivity());
+
         auth = FirebaseAuth.getInstance();
 
-        contraseña = view.findViewById(R.id.Res_password);
         correo = view.findViewById(R.id.Res_correo);
 
         database = FirebaseDatabase.getInstance().getReference();
 
         final NavController navController = Navigation.findNavController(view);
-        final Button restablecer = view.findViewById(R.id.btn_restablecer);
+        Button restablecer = view.findViewById(R.id.btn_restablecer);
+
         restablecer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resetpassword();
+
+               email = correo.getText().toString();
+               if (!email.isEmpty()){
+                   dialog = new SpotsDialog.Builder()
+                           .setContext(getActivity())
+                           .setMessage("Espere un momento por favor...")
+                           .setCancelable(false)
+                           .build();
+                   dialog.show();
+                  /* builder = new AlertDialog.Builder(getActivity());
+
+                   // Get the layout inflater
+
+
+                   // Inflate and set the layout for the dialog
+                   // Pass null as the parent view because its going in the dialog layout
+                   builder.setTitle("Información")
+                           // Add action buttons
+                           .setMessage("Espere un momento por favor...")
+                           .setCancelable(false);
+                           //.create();
+                   dialog = builder.create();
+                   dialog.show();*/
+                   Handler handler = new Handler();
+                   handler.postDelayed(new Runnable() {
+                       @Override
+                       public void run() {
+                           dialog.dismiss();
+                           resetPassword();
+                       }
+                   }, 4000);
+
+
+               }else{
+                   Toast.makeText(getActivity() , "Debe ingresar el correo.", Toast.LENGTH_SHORT).show();
+               }
             }
         });
     }
 
-    private void resetpassword(){
-         pass = contraseña.getText().toString();
-         email= correo.getText().toString();
+    private void resetPassword(){
+        auth.setLanguageCode("es");
+        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
 
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user!=null){
-            final String uid = user.getUid();
-            database.child("users").child(uid).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()){
-
-                        Map<String, Object> personaMap = new HashMap<>();
-
-                        personaMap.put("Contraseña", pass);
-
-
-                        database.child("users").child(uid).updateChildren(personaMap);
-                        Toast.makeText(getActivity() , "Actualización Exitosa.", Toast.LENGTH_SHORT).show();
-                    }
+                if (task.isSuccessful()){
+                    Toast.makeText(getActivity() , "Se ha enviado un correo para restablecer su contraseña.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getActivity() , "No se pudo enviar el correo para restablecer su contraseña.", Toast.LENGTH_SHORT).show();
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }else{
-
-        }
-
-
+            }
+        });
     }
+
 }

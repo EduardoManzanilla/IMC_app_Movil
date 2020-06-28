@@ -155,7 +155,6 @@ public class registrarFragment extends Fragment {
                     map.put("Peso", weight);
                     map.put("Estatura", height);
                     map.put("Correo", email);
-                    map.put("Contraseña", password);
 
                     String id = auth.getCurrentUser().getUid();
                     database.child("users").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {

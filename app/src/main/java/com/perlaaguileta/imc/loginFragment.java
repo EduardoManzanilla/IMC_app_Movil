@@ -97,6 +97,14 @@ public class loginFragment extends Fragment {
 
         Button log = view.findViewById(R.id.btn_sesion);
         TextView registrar = view.findViewById(R.id.textRegistrar);
+        TextView restablecer = view.findViewById(R.id.textOlvidar);
+
+        restablecer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_loginFragment_to_restablecerPasswordFragment);
+            }
+        });
 
         log.setOnClickListener(new View.OnClickListener() {
             @Override

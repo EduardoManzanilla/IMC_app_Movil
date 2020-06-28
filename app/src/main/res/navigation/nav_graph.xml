@@ -48,7 +48,11 @@
         android:id="@+id/editarFragment"
         android:name="com.perlaaguileta.imc.EditarFragment"
         android:label="fragment_editar"
-        tools:layout="@layout/fragment_editar" />
+        tools:layout="@layout/fragment_editar" >
+        <action
+            android:id="@+id/action_editarFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registrarFragment"
         android:name="com.perlaaguileta.imc.registrarFragment"

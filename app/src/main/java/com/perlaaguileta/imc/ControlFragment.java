@@ -111,7 +111,6 @@ public class ControlFragment extends Fragment {
         Button btn_editarDatos = view.findViewById(R.id.btn_editarDatos);
         Button btn_informe = view.findViewById(R.id.btn_informe);
         Button btn_cerrar = view.findViewById(R.id.btn_cerrarSesion);
-        Button btn_eliminar = view.findViewById(R.id.btn_eliminarCuenta);
 
         getUserInfo();
 
@@ -128,50 +127,11 @@ public class ControlFragment extends Fragment {
                 navController.navigate(R.id.action_controlFragment_to_informeFragment);
             }
         });
-        btn_eliminar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user!=null){
-                    final String uid = user.getUid();
-                    database.child("users").child(uid).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()){
-                                validate();
-                                database.child("users").child(uid).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        navController.navigate(R.id.action_controlFragment_to_inicioFragment);
-                                        Toast.makeText(getActivity() , "Cuenta Eliminada con Exito.", Toast.LENGTH_SHORT).show();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(getActivity() , "Lo sentinmos tenems problemas para eliminar su cuenta.", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                }else{
-
-                }
-            }
-        });
 
         btn_cerrar.setOnClickListener(new View.OnClickListener() {
             //private FirebaseAuth firebaseAuth;
             @Override
             public void onClick(View v) {
-
                 auth.signOut();
                 navController.navigate(R.id.action_controlFragment_to_inicioFragment);
             }
@@ -179,53 +139,6 @@ public class ControlFragment extends Fragment {
                 //auth.getInstance().signOut();
 
             });
-
-
-    }
-
-    private void validate() {//Metodo para eliminar usuario des de la autenticacion
-
-        String id = null;
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user!=null) {
-            id = user.getUid();
-            Log.i("getUid: ", id);
-
-        database.child("users").child(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-
-                    String coo = dataSnapshot.child("Correo").getValue().toString();
-                    String cont = dataSnapshot.child("Contraseña").getValue().toString();
-
-                        AuthCredential credential = EmailAuthProvider.getCredential(coo, cont);
-
-                        user.reauthenticate(credential).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                System.out.println("Re-authenticated");
-                                user.delete();
-
-                            }
-                        });
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        }else {
-            Log.i("getUid",  "usuario no encontrado");
-
-        }
-
-
     }
 
     private void getUserInfo(){
@@ -235,16 +148,11 @@ public class ControlFragment extends Fragment {
         FirebaseUser user = auth.getCurrentUser();
         if (user!=null) {
             id = user.getUid();
-            Toast.makeText(getActivity() , "detecto el uid.", Toast.LENGTH_SHORT).show();
-            Log.i("getUid: ", id);
-
 
         database.child("users").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
-                    String pes2 = dataSnapshot.child("Peso").getValue().toString();
-                    String estatu2 = dataSnapshot.child("Estatura").getValue().toString();
                     double pes = Double.parseDouble(dataSnapshot.child("Peso").getValue().toString());
                     double estatu = Double.parseDouble(dataSnapshot.child("Estatura").getValue().toString());;
 
