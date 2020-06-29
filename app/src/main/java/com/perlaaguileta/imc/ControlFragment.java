@@ -252,7 +252,7 @@ public class ControlFragment extends Fragment {
                         AvanceMap.put("IMC", imcAvance);
                         AvanceMap.put("Clasificación", cad);
                         AvanceMap.put("Recomendación", recomendacion);
-                        
+
                         database.child("users").child(uid).child("Avances").child(formattedDate).setValue(AvanceMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task2) {
