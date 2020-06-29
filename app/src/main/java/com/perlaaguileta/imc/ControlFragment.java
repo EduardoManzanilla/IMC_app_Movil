@@ -18,8 +18,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +32,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -111,9 +116,16 @@ public class ControlFragment extends Fragment {
         Button btn_editarDatos = view.findViewById(R.id.btn_editarDatos);
         Button btn_informe = view.findViewById(R.id.btn_informe);
         Button btn_cerrar = view.findViewById(R.id.btn_cerrarSesion);
+        Button btn_avance = view.findViewById(R.id.btn_registrarAvance);
 
         getUserInfo();
 
+        btn_avance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registroAvance();
+            }
+        });
         btn_editarDatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,5 +228,51 @@ public class ControlFragment extends Fragment {
         }else{
             cad="no existe clasificacion";
         }
+    }
+
+    private void registroAvance(){
+
+        Date c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        final String formattedDate = df.format(c);
+
+        final String imcAvance = imc.getText().toString();
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user!=null){
+            final String uid = user.getUid();
+            database.child("users").child(uid).child("Avances").addValueEventListener(new ValueEventListener() {
+               @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+
+                        final Map <String, Object> AvanceMap = new HashMap<>();
+                        AvanceMap.put("IMC", imcAvance);
+                        AvanceMap.put("Clasificación", cad);
+                        AvanceMap.put("Recomendación", recomendacion);
+                        
+                        database.child("users").child(uid).child("Avances").child(formattedDate).setValue(AvanceMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task2) {
+                                if (task2.isSuccessful()) {
+                                    Toast.makeText(getActivity(), "Avance registrado satisfactoriamnete.", Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    Toast.makeText(getActivity(), "No se pudo registrar el avance. Intentelo más tarde.", Toast.LENGTH_SHORT).show();
+                                }
+                            }});
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }else{
+            Toast.makeText(getActivity() , "No se pudo realizar la actualización.", Toast.LENGTH_SHORT).show();
+       }
     }
 }

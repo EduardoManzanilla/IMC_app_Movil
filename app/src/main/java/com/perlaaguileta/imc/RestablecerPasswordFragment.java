@@ -126,20 +126,7 @@ public class RestablecerPasswordFragment extends Fragment {
                            .setCancelable(false)
                            .build();
                    dialog.show();
-                  /* builder = new AlertDialog.Builder(getActivity());
 
-                   // Get the layout inflater
-
-
-                   // Inflate and set the layout for the dialog
-                   // Pass null as the parent view because its going in the dialog layout
-                   builder.setTitle("Información")
-                           // Add action buttons
-                           .setMessage("Espere un momento por favor...")
-                           .setCancelable(false);
-                           //.create();
-                   dialog = builder.create();
-                   dialog.show();*/
                    Handler handler = new Handler();
                    handler.postDelayed(new Runnable() {
                        @Override
