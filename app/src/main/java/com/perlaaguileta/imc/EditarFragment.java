@@ -123,7 +123,12 @@ public class EditarFragment extends Fragment {
         btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 getUserInfo();
+                /*
+                edad = view.findViewById(R.id.txt_Edad);
+                peso =  view.findViewById(R.id.txt_Peso);
+                estatura = view.findViewById(R.id.txt_Estatura);*/
             }
         });
 
@@ -166,6 +171,29 @@ public class EditarFragment extends Fragment {
         height = Double.parseDouble(estatura.getText().toString());
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user!=null) {
+            final String uid = user.getUid();
+
+            HashMap personaMap = new HashMap();
+            personaMap.put("Peso", weight);
+            personaMap.put("Estatura", height);
+            personaMap.put("Edad", age);
+
+            database.child("users").child(uid).updateChildren(personaMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(getActivity() , "Actualización Exitosa.", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }else{
+
+        }
+     /*   age = Integer.valueOf(edad.getText().toString());
+        weight = Double.parseDouble(peso.getText().toString());
+        height = Double.parseDouble(estatura.getText().toString());
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user!=null){
             final String uid = user.getUid();
             database.child("users").child(uid).addValueEventListener(new ValueEventListener() {
@@ -192,7 +220,7 @@ public class EditarFragment extends Fragment {
             });
         }else{
 
-        }
+        }*/
     }
 
 

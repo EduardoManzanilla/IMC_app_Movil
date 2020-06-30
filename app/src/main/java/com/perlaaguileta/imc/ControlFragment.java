@@ -243,7 +243,7 @@ public class ControlFragment extends Fragment {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user!=null){
             final String uid = user.getUid();
-            database.child("users").child(uid).child("Avances").addValueEventListener(new ValueEventListener() {
+            database.child("users").child(uid).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()){
