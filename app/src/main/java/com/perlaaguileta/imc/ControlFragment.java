@@ -55,7 +55,7 @@ public class ControlFragment extends Fragment {
 
     EditText  imc, clasi, reco;
    // TextView reco;
-    String cad, recomendacion;
+    String cad, recomendacion, imagen;
     boolean bandera = true;
 
     // TODO: Rename and change types of parameters
@@ -195,35 +195,35 @@ public class ControlFragment extends Fragment {
 
         if(imc<16.00){
             cad="Infrapeso: Delgadez Severa";
-            //video="https://youtu.be/u5XWTI-Dh2E";
+            imagen="https://quediferenciahay.com/wp-content/uploads/2014/09/Nutriologo-y-nutricionista-SFW.jpg";
             recomendacion="Comunicarse con un nutriologo.";
         }else if(imc>=16.00 && imc<=16.99){
             cad="Infrapeso: Delgadez moderada";
-            //video="https://youtu.be/n4QcaTD7E7U";
+            imagen="https://img.europapress.es/fotoweb/fotonoticia_20150109140616_1024.jpg";
             recomendacion="Aumenta la ingesta de cereales.";
         }else if(imc>=17.00 && imc<=18.49){
             cad="Infrapeso: Delgadez aceptable";
-            //video="https://youtu.be/LS56C5L8kU8";
+            imagen="https://www.cambio16.com/wp-content/uploads/2018/03/proteina-animal-vegetal-640x426.jpg";
             recomendacion="Aumenta la ingesta de proteinas.";
         }else if(imc>=18.50 && imc<=24.99){
             cad="Peso Normal";
-            //video="https://youtu.be/1Gx1KYNn7I4";
+            imagen="https://www.anahuac.mx/mexico/sites/default/files/noticias/Hacer-ejercicio-fisico-te-ayuda-a-fortalecer-tu-funcion-inmune.jpg";
             recomendacion= "Entrenar 3 a 5 veces por semana.";
         }else if(imc>=25.00 && imc<=29.99){
             cad="Sobrepeso";
-            //video="https://youtu.be/dpSp5YWURXM";
+            imagen="https://www.cubahora.cu/uploads/imagen/2019/09/30/azucar-consumo.jpeg";
             recomendacion="Reducir el consumo de azucar.";
         }else if(imc>=30.00 && imc<=34.99){
             cad="Obeso: Tipo I";
-            //video="https://youtu.be/oD_3kK1l6HQ";
+            imagen="https://i.blogs.es/c4739e/platoservidos/450_1000.jpg";
             recomendacion="Controlar las cantidades de comida.";
         }else if(imc>=35.00 && imc<=39.99){
             cad="Obeso: Tipo II";
-            //video="https://youtu.be/4_yBelxSi7M";
+            imagen="https://estaticos.serpadres.es/media/cache/760x570_thumb/uploads/images/article/53db7277dce6174d23528c27/dieta.jpg";
             recomendacion="Disponer de un metodo o dieta.";
         }else if(imc>=40.00 ){
             cad="Obeso: Tipo III";
-            //video="https://youtu.be/3vR6BkGeVA8";
+            imagen="https://hidrolipoclasiainfo.files.wordpress.com/2011/07/disminuir-consumo-de-grasas.jpg?w=584";
             recomendacion="Disminuir el consumo de grasas.";
         }else{
             cad="no existe clasificacion";
@@ -244,7 +244,7 @@ public class ControlFragment extends Fragment {
         if (user!=null){
             final String uid = user.getUid();
             database.child("users").child(uid).child("Avances").addValueEventListener(new ValueEventListener() {
-               @Override
+                @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()){
 
@@ -252,6 +252,7 @@ public class ControlFragment extends Fragment {
                         AvanceMap.put("IMC", imcAvance);
                         AvanceMap.put("Clasificación", cad);
                         AvanceMap.put("Recomendación", recomendacion);
+                        AvanceMap.put("image", imagen);
 
                         database.child("users").child(uid).child("Avances").child(formattedDate).setValue(AvanceMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -263,16 +264,17 @@ public class ControlFragment extends Fragment {
                                     Toast.makeText(getActivity(), "No se pudo registrar el avance. Intentelo más tarde.", Toast.LENGTH_SHORT).show();
                                 }
                             }});
+                    }else {
+                        Toast.makeText(getActivity() , "No se pudo realizar la operacion.", Toast.LENGTH_SHORT).show();
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });
         }else{
-            Toast.makeText(getActivity() , "No se pudo realizar la actualización.", Toast.LENGTH_SHORT).show();
+
        }
     }
 }

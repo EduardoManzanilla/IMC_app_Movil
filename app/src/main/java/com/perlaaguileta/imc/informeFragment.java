@@ -2,11 +2,26 @@ package com.perlaaguileta.imc;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +38,16 @@ public class informeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    DatabaseReference reference;
+    FirebaseAuth auth;
+    RecyclerView recyView;
+    ArrayList<Avances> arrayH;
+    Adaptador adapter;
+
+    String imc, clasi, reco, imagen;
+
+
 
     public informeFragment() {
         // Required empty public constructor
@@ -60,5 +85,45 @@ public class informeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_informe, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        String id = null;
+        recyView = (RecyclerView) view.findViewById(R.id.recycleAvance);
+        recyView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        arrayH = new ArrayList<Avances>();
+        reference = FirebaseDatabase.getInstance().getReference();
+        auth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = auth.getCurrentUser();
+        if (user!=null) {
+            id = user.getUid();
+
+            reference.child("users").child(id).child("Avances").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snap: dataSnapshot.getChildren()){
+                       // Avances a = snap.getValue(Avances.class);
+                        imc = snap.child("IMC").getValue().toString();
+                        clasi = snap.child("Clasificación").getValue().toString();
+                        reco = snap.child("Recomendación").getValue().toString();
+                        imagen = snap.child("image").getValue().toString();
+                        Avances a = new Avances(imc,clasi,reco,imagen);
+                        arrayH.add(a);
+                    }
+                    adapter = new Adaptador(getActivity(),arrayH);
+                    recyView.setAdapter(adapter);
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 }

@@ -177,10 +177,11 @@ public class EditarFragment extends Fragment {
                         personaMap.put("Peso", weight);
                         personaMap.put("Estatura", height);
                         personaMap.put("Edad", age);
-                        //personaMap.put("Contraseña", password);
 
                         database.child("users").child(uid).updateChildren(personaMap);
                         Toast.makeText(getActivity() , "Actualización Exitosa.", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getActivity() , "No se pudo realizar la actualización.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -190,7 +191,7 @@ public class EditarFragment extends Fragment {
                 }
             });
         }else{
-            Toast.makeText(getActivity() , "No se pudo realizar la actualización.", Toast.LENGTH_SHORT).show();
+
         }
     }
 
