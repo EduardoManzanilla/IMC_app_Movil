@@ -19,7 +19,7 @@
             android:layout_width="250dp"
             android:layout_height="190dp"
             android:layout_marginBottom="40dp"
-            android:src="@drawable/imcpeso" />
+            android:src="@drawable/ic_login_bro" />
 
         <EditText
             android:id="@+id/edtUsuario"
@@ -58,6 +58,8 @@
             android:layout_marginTop="40dp"
             android:layout_marginRight="15dp"
             android:text="Iniciar Sesión"
+            android:textColor="@color/secondaryTextColor"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:textSize="18sp" />
         <TextView
             android:id="@+id/textOlvidar"
@@ -65,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="¿Olvidaste tu cantraseña?"
+            android:textColor="@color/red_200"
             android:gravity="center"
             />
         <TextView
@@ -73,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Registrarse"
+            android:textColor="@color/colorPrimary"
             android:gravity="center"
             />
 

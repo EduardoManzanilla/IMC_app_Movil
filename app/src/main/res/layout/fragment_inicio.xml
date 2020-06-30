@@ -1,26 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".inicioFragment"
-    android:background="@drawable/fondo">
+    tools:context=".inicioFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="306dp"
-        android:layout_height="314dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/imc" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="52dp"
-        android:text="Bienvenido a nuestro sistema de IMC"
-        android:textColor="@android:color/white"
-        android:textSize="23.5sp"
-        android:layout_centerHorizontal="true"/>
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="40dp"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            android:src="@drawable/imcpeso"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Control de IMC" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:text="¡Bienvenido a nuestra aplicación!" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/btn_login"
+            android:textColor="@color/secondaryTextColor"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="@string/btn_login" />
+    </LinearLayout>
+</FrameLayout>

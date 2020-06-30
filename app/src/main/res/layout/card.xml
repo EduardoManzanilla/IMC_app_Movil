@@ -25,19 +25,19 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/imagen"
             android:text="IMC: "
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/clasificacion2"
-            android:layout_width="138dp"
-            android:layout_height="wrap_content"
+            android:layout_width="191dp"
+            android:layout_height="21dp"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="50dp"
-            android:layout_marginRight="-39dp"
+            android:layout_marginRight="-91dp"
             android:layout_toLeftOf="@id/clasificacion"
             android:layout_toRightOf="@+id/imagen"
             android:text="Clasificación: "
@@ -48,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="85dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="75dp"
             android:layout_toRightOf="@+id/imagen"
             android:text="Recomendación: "
             android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -59,8 +59,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="13dp"
-            android:layout_marginTop="23dp"
+            android:layout_marginLeft="-32dp"
+            android:layout_marginTop="29dp"
             android:layout_toRightOf="@+id/imc2"
             android:text="Imc"
             android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -71,8 +71,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imc"
             android:layout_alignLeft="@+id/imc"
-            android:layout_marginLeft="46dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="109dp"
+            android:layout_marginTop="5dp"
             android:text="clasificacion"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -80,10 +80,10 @@
             android:id="@+id/recomendacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/clasificacion"
-            android:layout_alignLeft="@+id/clasificacion"
-            android:layout_marginLeft="-18dp"
-            android:layout_marginTop="23dp"
+            android:layout_below="@+id/recomendacion2"
+            android:layout_alignLeft="@+id/recomendacion2"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:text="recomendacion"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
