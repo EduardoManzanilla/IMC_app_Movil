@@ -17,14 +17,14 @@
             android:layout_margin="40dp"
             android:layout_gravity="center"
             android:foregroundGravity="center"
-            android:src="@drawable/imc"/>
+            android:src="@drawable/imcpeso"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20dp"
             android:textStyle="bold"
             android:layout_margin="10dp"
             android:gravity="center"
@@ -33,10 +33,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:textColor="@color/colorPrimary"
+
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:text="Bienvenido a nuestra aplicación" />
+            android:text="¡Bienvenido a nuestra aplicación!" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,6 +44,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/btn_login"
+            android:textColor="@color/secondaryTextColor"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:text="@string/btn_login" />
     </LinearLayout>
 </FrameLayout>

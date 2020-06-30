@@ -19,16 +19,24 @@
             android:layout_height="wrap_content"
             android:textSize="22dp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDark"
             android:gravity="center"
+            android:layout_marginEnd="8dp"
             android:text="Registrarse" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="250dp"
+            android:layout_height="190dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_insurance_pana" />
 
         <EditText
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="@android:color/darker_gray"
             android:ems="10"
@@ -106,6 +114,8 @@
             android:layout_marginTop="40dp"
             android:layout_marginRight="15dp"
             android:text="Enviar"
+            android:textColor="@color/secondaryTextColor"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:textSize="18sp" />
 
     </LinearLayout>
