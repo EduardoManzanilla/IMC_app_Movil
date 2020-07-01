@@ -125,10 +125,6 @@ public class EditarFragment extends Fragment {
             public void onClick(View view) {
 
                 getUserInfo();
-                /*
-                edad = view.findViewById(R.id.txt_Edad);
-                peso =  view.findViewById(R.id.txt_Peso);
-                estatura = view.findViewById(R.id.txt_Estatura);*/
             }
         });
 
@@ -182,45 +178,13 @@ public class EditarFragment extends Fragment {
             database.child("users").child(uid).updateChildren(personaMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Toast.makeText(getActivity() , "Actualización Exitosa.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext() , "Actualización Exitosa.", Toast.LENGTH_SHORT).show();
                 }
             });
 
         }else{
 
         }
-     /*   age = Integer.valueOf(edad.getText().toString());
-        weight = Double.parseDouble(peso.getText().toString());
-        height = Double.parseDouble(estatura.getText().toString());
-
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user!=null){
-            final String uid = user.getUid();
-            database.child("users").child(uid).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()){
-
-                        Map <String, Object> personaMap = new HashMap<>();
-                        personaMap.put("Peso", weight);
-                        personaMap.put("Estatura", height);
-                        personaMap.put("Edad", age);
-
-                        database.child("users").child(uid).updateChildren(personaMap);
-                        Toast.makeText(getActivity() , "Actualización Exitosa.", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(getActivity() , "No se pudo realizar la actualización.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }else{
-
-        }*/
     }
 
 
@@ -315,12 +279,12 @@ public class EditarFragment extends Fragment {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 navController.navigate(R.id.action_editarFragment_to_inicioFragment);
-                                Toast.makeText(getActivity() , "Cuenta Eliminada con Exito.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext() , "Cuenta Eliminada con Exito.", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getActivity() , "Lo sentinmos tenems problemas para eliminar su cuenta.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext() , "Lo sentinmos tenems problemas para eliminar su cuenta.", Toast.LENGTH_SHORT).show();
                             }
                         });
 

@@ -138,7 +138,7 @@ public class RestablecerPasswordFragment extends Fragment {
 
 
                }else{
-                   Toast.makeText(getActivity() , "Debe ingresar el correo.", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getContext() , "Debe ingresar el correo.", Toast.LENGTH_SHORT).show();
                }
             }
         });
@@ -151,9 +151,9 @@ public class RestablecerPasswordFragment extends Fragment {
             public void onComplete(@NonNull Task<Void> task) {
 
                 if (task.isSuccessful()){
-                    Toast.makeText(getActivity() , "Se ha enviado un correo para restablecer su contraseña.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext() , "Se ha enviado un correo para restablecer su contraseña.", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getActivity() , "No se pudo enviar el correo para restablecer su contraseña.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext() , "No se pudo enviar el correo para restablecer su contraseña.", Toast.LENGTH_SHORT).show();
                 }
 
             }

@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
             android:text="Registrar Avance"
             android:textSize="18sp" />
@@ -92,33 +92,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:text="Informe"
             android:textSize="18sp" />
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_editarDatos"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="0dp"
-            android:src="@drawable/ic_baseline_edit_24" />
 
-        <Button
-            android:id="@+id/btn_cerrarSesion"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="0dp"
-            android:src ="@drawable/ic_baseline_close_24"
-            style="@style/Widget.AppCompat.Button.Borderless"
-             />
+    <Button
+        android:id="@+id/btn_editarDatos"
+
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="0dp"
+        android:backgroundTint="#FFC107"
+        android:drawableBottom="@drawable/ic_baseline_edit_24"
+        />
+
+    <Button
+        android:id="@+id/btn_cerrarSesion"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="0dp"
+        android:drawableBottom="@drawable/ic_baseline_lock_24"
+        />
 
 </RelativeLayout>
     </LinearLayout>
